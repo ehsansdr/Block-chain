@@ -1,10 +1,15 @@
+import java.util.ArrayList;
+
 public class Chain implements Runnable {
-     private int fps = 120;
-     private int UPS = 2;
+     Block firstBlock = new Block(0);
+     private int transactionPS = firstBlock.transactionNumberLimit;
+     private int blockPS = 1;
+     ArrayList<Block> blocks = new ArrayList<>();
      Thread ChainLoopThread;
      int i = 1;
 
      public Chain(){
+         blocks.add(firstBlock);
 
          ChainLoopThread = new Thread(this);
          ChainLoopThread.start();
@@ -12,40 +17,47 @@ public class Chain implements Runnable {
 
      @Override
      public void run(){
-         double timePerFrame = 1000000000.0 / fps;
-         double timePerUpdate = 1000000000.0 / UPS;
+         double timePerEachTransaction = 1000000000.0 / transactionPS;
+         double timePerEachBlock = 1000000000.0 / blockPS;
          long previousTime = System.nanoTime();
 
          int frames = 0;
          int updates = 0;
          long lastCheck = System.currentTimeMillis();
 
-         double deltaU = 0;
-         double deltaF = 0;
+         double deltaBlockTime = 0;
+         double deltaTransactionTime = 0;
 
          while (true) {
              long currentTime = System.nanoTime();
 
-             deltaU += (currentTime - previousTime) / timePerUpdate;
-             deltaF += (currentTime - previousTime) / timePerFrame;
+             deltaBlockTime += (currentTime - previousTime) / timePerEachBlock;
+             deltaTransactionTime += (currentTime - previousTime) / timePerEachTransaction;
              previousTime = currentTime;
 
-             if (deltaU >= 1) {
-                 System.out.println("\n");
-                 System.out.println(new Transaction(i));
+
+             //for creating block
+             if (deltaBlockTime >= 1) {
+                 System.out.println();
+                 blocks.add(new Block(blocks.get(blocks.size() - 1).hashCode()));
+                 System.out.println(blocks.get(blocks.size() - 1));
                  i++;
 
                  updates++;
-                 deltaU--;
+                 deltaBlockTime--;
              }
 
-//             if (deltaF >= 1) {//fbs
-//
-//             }
+             //for creating transaction
+             if (deltaTransactionTime >= 1) {
+                 blocks.get(blocks.size() - 1).addTransaction(new Transaction(0));
+
+                 updates++;
+                 deltaTransactionTime--;
+             }
 
              if (System.currentTimeMillis() - lastCheck >= 1000) {//every 1 sec
                  lastCheck = System.currentTimeMillis();
-                 System.out.println("FPS: " + frames +" | UPS: " + updates );
+                 System.out.println("FPS: " + frames +" | blockPS: " + updates );
                  frames = 0;
                  updates = 0;
              }
