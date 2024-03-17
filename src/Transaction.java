@@ -35,13 +35,11 @@ public class Transaction {
     
     @Override
     public String toString() {
-        return "Transaction{" +
-                "\n\tTransactionId= " + TransactionId +
-                "\n\tsenderName= \"" + senderName + "\"" +
-                "\n\tamount = " + amount +
+        return "\n\tTransactionId : " + TransactionId +
+                "\t|\tsenderName : \"" + senderName + "\"" +
+                "\t|\tamount = " + amount +
                 " $ " +
-                "\n\treceiverName= \"" + receiverName + "\"" +
-                "}";
+                "\t|\treceiverName : \"" + receiverName + "\"";
     }
 
 

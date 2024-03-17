@@ -25,11 +25,9 @@ public class Block {
 
     @Override
     public String toString() {
-        return "Block{" +
-                "ID : " + blockId +
-                "  , currentHash=" + currentHash +
-                ", transactions=" + transactions.size() +
-                ", previousHash=" + previousHash +
-                '}';
+        return "________________________________________________________\n"+
+                "BLOCK :" +
+                "\n\tID : " + blockId +"\t|\tcurrentHash : " + currentHash + "\t|\tpreviousHash : " + previousHash +
+                "\ntransactions :\n" + transactions.toString();
     }
 }

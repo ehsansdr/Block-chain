@@ -40,7 +40,7 @@ public class Chain implements Runnable {
              if (deltaBlockTime >= 1) {
                  System.out.println();
                  blocks.add(new Block(blocks.get(blocks.size() - 1).hashCode()));
-                 System.out.println(blocks.get(blocks.size() - 1));
+                 System.out.println(blocks.get(blocks.size() - (blocks.size() == 1 ? 1 : 2)));
                  i++;
 
                  updates++;
@@ -55,12 +55,12 @@ public class Chain implements Runnable {
                  deltaTransactionTime--;
              }
 
-             if (System.currentTimeMillis() - lastCheck >= 1000) {//every 1 sec
-                 lastCheck = System.currentTimeMillis();
-                 System.out.println("FPS: " + frames +" | blockPS: " + updates );
-                 frames = 0;
-                 updates = 0;
-             }
+//             if (System.currentTimeMillis() - lastCheck >= 1000) {//every 1 sec
+//                 lastCheck = System.currentTimeMillis();
+//                 System.out.println("FPS: " + frames +" | blockPS: " + updates );
+//                 frames = 0;
+//                 updates = 0;
+//             }
          }
      }
 }
