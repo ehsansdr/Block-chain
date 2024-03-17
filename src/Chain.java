@@ -1,9 +1,11 @@
 public class Chain implements Runnable {
      private int fps = 120;
-     private int UPS = 120;
+     private int UPS = 2;
      Thread ChainLoopThread;
+     int i = 1;
 
      public Chain(){
+
          ChainLoopThread = new Thread(this);
          ChainLoopThread.start();
      }
@@ -29,16 +31,21 @@ public class Chain implements Runnable {
              previousTime = currentTime;
 
              if (deltaU >= 1) {
+                 System.out.println("\n");
+                 System.out.println(new Transaction(i));
+                 i++;
 
+                 updates++;
+                 deltaU--;
              }
 
-             if (deltaF >= 1) {//fbs
-
-             }
+//             if (deltaF >= 1) {//fbs
+//
+//             }
 
              if (System.currentTimeMillis() - lastCheck >= 1000) {//every 1 sec
                  lastCheck = System.currentTimeMillis();
-                 System.out.println("FPS: " + frames +" | " + updates );
+                 System.out.println("FPS: " + frames +" | UPS: " + updates );
                  frames = 0;
                  updates = 0;
              }

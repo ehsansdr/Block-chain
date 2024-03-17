@@ -8,11 +8,11 @@ public class Transaction {
     int amount;
     String[] uppercaseLetter = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
     String[] lowercaseLetter = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
-    char[] currency;
     Random rand = new Random();
 
     public Transaction(long transactionId) {
         TransactionId = transactionId;
+        amount = rand.nextInt(900_000_00);
 
         senderName.append(nameCreator());
         receiverName.append(nameCreator());
@@ -36,12 +36,12 @@ public class Transaction {
     @Override
     public String toString() {
         return "Transaction{" +
-                "\n\tTransactionId=" + TransactionId +
-                "\n\tsenderName='" + senderName + '\'' +
-                "\n\treceiverName='" + receiverName + '\'' +
-                "\n\tamount=" + amount +
-                "\n\tcurrency=" + Arrays.toString(currency) +
-                '}';
+                "\n\tTransactionId= " + TransactionId +
+                "\n\tsenderName= \"" + senderName + "\"" +
+                "\n\tamount = " + amount +
+                " $ " +
+                "\n\treceiverName= \"" + receiverName + "\"" +
+                "}";
     }
 
 
