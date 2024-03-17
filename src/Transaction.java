@@ -2,7 +2,8 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Transaction {
-    long TransactionId;
+    static long TransactionPassed = 1;
+    long transactionId;
     StringBuffer senderName = new StringBuffer();
     StringBuffer receiverName = new StringBuffer();
     int amount;
@@ -10,12 +11,14 @@ public class Transaction {
     String[] lowercaseLetter = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
     Random rand = new Random();
 
-    public Transaction(long transactionId) {
-        TransactionId = transactionId;
+    public Transaction() {
+        this.transactionId = TransactionPassed;
         amount = rand.nextInt(900_000_00);
 
         senderName.append(nameCreator());
         receiverName.append(nameCreator());
+
+        TransactionPassed++;
     }
 
     private StringBuffer nameCreator() {
@@ -35,7 +38,7 @@ public class Transaction {
     
     @Override
     public String toString() {
-        return "\n\tTransactionId : " + TransactionId +
+        return "\n\tTransactionId : " + transactionId +
                 "\t|\tsenderName : \"" + senderName + "\"" +
                 "\t|\tamount = " + amount +
                 " $ " +

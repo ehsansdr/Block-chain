@@ -49,7 +49,7 @@ public class Chain implements Runnable {
 
              //for creating transaction
              if (deltaTransactionTime >= 1) {
-                 blocks.get(blocks.size() - 1).addTransaction(new Transaction(0));
+                 blocks.get(blocks.size() - 1).addTransaction(new Transaction( ));
 
                  updates++;
                  deltaTransactionTime--;
